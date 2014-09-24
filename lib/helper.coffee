@@ -139,8 +139,22 @@ getTokenizedAlignCharacter = (tokens) ->
     for scope in token.scopes when scope.match(config.scope)?
       return tokenValue
 
+getConfigDefaults = ->
+  allowedKeys = ["alignment", "leftSpace", "rightSpace"]
+
+  configDefaults = {}
+
+  for character, config of operatorConfig
+    for key, value of config when key in allowedKeys
+      newKey = "#{character}#{key.charAt(0).toUpperCase()}#{key.slice(1)}"
+
+      configDefaults[newKey] = value
+
+  return configDefaults
+
 module.exports = {
   getSameIndentationRange
   parseTokenizedLine
   getTokenizedAlignCharacter
+  getConfigDefaults
 }

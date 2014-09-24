@@ -61,10 +61,13 @@ align = (editor) ->
       # Update the cursor to the end of the original line
       editor.setCursorBufferPosition [origRow, editor.lineTextForBufferRow(origRow).length]
 
+configDefaults = helper.getConfigDefaults()
+console.log configDefaults
 
 module.exports =
-  align:    align
-  activate: ->
+  align:          align
+  configDefaults: configDefaults
+  activate:       ->
     atom.workspaceView.command 'vertical-align:align', '.editor', ->
       editor = atom.workspace.getActivePaneItem()
       align(editor)
